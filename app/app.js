@@ -8,13 +8,13 @@ const form = document.querySelector(".input-field");
 let savedTodos = JSON.parse(localStorage.getItem("todos")) ?? []; // Пытаемся получить массив из localStorage, если там что то есть
 let todos = savedTodos; //Массив тудушек
 
-
 // Отключение кнопки
 const drawBtns = () => {
-  !todos.length
-    ? (allBtn.disabled = true)
-    : (allBtn.disabled = false);
-}
+  todos.length ? (allBtn.disabled = false) : (allBtn.disabled = true);
+  todos.find((elem) => elem.isDone)
+    ? (chkBtn.disabled = false)
+    : (chkBtn.disabled = true);
+};
 
 //Функция добавления новой туду
 const addTodo = (evt) => {
@@ -32,7 +32,7 @@ const addTodo = (evt) => {
   input.value = "";
   input.focus(); // Не теряем фокус с инпута
   renderTodos(); // Отрисовка
-}
+};
 
 // Удаление тудушки по id
 const delTodo = (id) => {
@@ -78,7 +78,7 @@ const drawTodo = (obj) => {
   chk.addEventListener("change", () => toggleIsDone(obj.id)); // Событие чекбокса
   del.addEventListener("click", () => delTodo(obj.id)); // Событие удаления
   return li;
-}
+};
 
 //Функция отрисовки всех туду из массива
 const renderTodos = () => {
@@ -86,9 +86,9 @@ const renderTodos = () => {
   localStorage.setItem("todos", JSON.stringify(todos));
   todos.forEach((item) => {
     list.append(drawTodo(item));
-  })
+  });
   drawBtns();
-}
+};
 
 //Первичная отрисовка
 renderTodos();
