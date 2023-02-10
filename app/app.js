@@ -10,8 +10,8 @@ let todos = savedTodos; //Массив тудушек
 
 // Отключение кнопки
 const drawBtns = () => {
-  todos.length ? (allBtn.disabled = false) : (allBtn.disabled = true);
-  todos.find((elem) => elem.isDone)
+  todos.length ? (allBtn.disabled = false) : (allBtn.disabled = true); // Отключаем кнопку удалть все, если в массиве туду ничего нет
+  todos.find((elem) => elem.isDone) // Отключаем кнопку удалить завершенные, если в массиве нет завершенных туду
     ? (chkBtn.disabled = false)
     : (chkBtn.disabled = true);
 };
